@@ -73,3 +73,41 @@ testFunction();
 console.log("main program:");
 console.log(globalGreeting);
 console.log(localGreeting); // -> Uncaught ReferenceError: localGreeting is not defined
+
+
+/*
+In the local scope, in which we declare a local variable using its name, 
+we will have access to the local value 
+(the global variable is hidden behind the local one, so we do not have access to it in this local scope).
+
+Using this name outside the local scope means that we will be referring to the global variable.
+This is not best programming practice, however, and we should avoid such situations. 
+example without shadowing:
+*/
+let  counter  =  100;
+console.log(counter);  //  ->  100
+{
+       counter  =  200;
+       console.log(counter);  //  ->  200
+}
+console.log(counter);  //  ->  200
+
+//The counter variable, declared at the beginning of the program, is a global variable.
+//Throughout the program, also inside the block, we operate on this very variable.
+
+//A small change in the code is enough for the program to behave completely differently.
+let  counter  =  100;
+console.log(counter);  //  ->  100
+{
+     let  counter  =  200;
+     console.log(counter);  //  ->  200
+}
+console.log(counter);  //  ->  100
+
+//This time in the block, instead of counter = 200;
+//the declaration is local (it’s a different scope than global) 
+//and all references to the variable with this name inside the block will refer to this local variable.
+
+//Outside the block, the global variable will still be seen under the same name.
+
+//try to avoid giving the same variable names to multiple variables, regardless of where you declare them.
