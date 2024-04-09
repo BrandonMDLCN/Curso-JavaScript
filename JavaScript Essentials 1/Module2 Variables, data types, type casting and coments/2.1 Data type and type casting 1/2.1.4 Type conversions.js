@@ -241,5 +241,5 @@ console.log(`${s4} [${typeof s4}]`); // -> abc200 [string]
 console.log(`${s5} [${typeof s5}]`); // -> abc200 [string] 
 console.log(`${s6} [${typeof s6}]`); // -> abctrue [string]
 
-const str1 = 42 + +"1";
-console.log(str1);  // -> 43
+const str3 = 42 + +"1";
+console.log(str3);  // -> 43
