@@ -308,9 +308,9 @@ The length of the array is obviously reduced by 1.
 let  names=  ["Olivia",  "Emma",  "Mateo",  "Samuel"];
 console.log(names.length);  //  ->  4
    
-let  name  =  names.pop();
+let  namess  =  names.pop();
 console.log(names.length);  //  ->  3
-console.log(name);  //  ->  Samuel
+console.log(namess);  //  ->  Samuel
 console.log(names);  //  ->  ["Olivia",  "Emma",  "Mateo"]
 
 /*----------------- Shift -----------------*/

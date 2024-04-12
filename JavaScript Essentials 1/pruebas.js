@@ -1,3 +1,4 @@
-let summer = ["June", "July", "August"];
+let nr =  3 * 4 > 20 - 15;
 
-console.log(summer);
+
+console.log(nr);
