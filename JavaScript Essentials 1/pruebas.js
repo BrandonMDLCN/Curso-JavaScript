@@ -1,19 +1,4 @@
-let gate = prompt("Choose gate: a, b, or c");
-let win = false;
-switch (gate) {
-    case "a":
-     alert("Gate A: empty");
-     break;
-    case "b":
-     alert("Gate B: main prize");
-     win = true;
-     break;
-    case "c":
-     alert("Gate C: empty");
-     break;
-    default:
-     alert("No gate " + String(gate));
+let a = (n) => {
+    return n > 2 ? n * a(n - 1) : 2
 }
-if (win) {
-    alert("Winner!");
-}
+console.log(a(6));
