@@ -1,32 +1,27 @@
 /* 
 Scenario
-Modify the ExtendedUser class (rewrite it) by adding a static match method to it. 
-The method should retrieve the teacher object, student object, and optionally a course name. 
-Its task is to find the match between the student and the teacher.
+Create a new class, ExtendedUser, that will inherit from the User class.
 
-In case the course name is not provided, the method should return:
+Put a setter and getter named fullName in it. The getter should return the first name and last name concatenated into one string. 
+The setter takes the concatenated first and last name *e.g. 'Rafael Fifer') and splits it into first and last name (the split method), 
+changing the appropriate properties of the object.
 
-an empty array if there is no match (the teacher does not teach courses the student is interested in, or teaches courses at a lower level)
-an array with {course, level} objects, if the teacher teaches the courses the student is interested in.
-If the course name is passed as the last argument, then the method should return the {course, level} object in case of a correct match, or undefined otherwise.
+Based on the ExtendedUser class, create two more classes, Teacher and Student (inheritance). 
+They should not have any new methods or properties, but only the default roles in their constructors to 'teacher' or 'student' respectively 
+(i.e. their constructors will take three parameters instead of four: name, surname, and email);
 
 Test your solution using the following code:
-
 let student1 = new Student({name: 'Rafael', surname: 'Fife', email: 'rfife@rhyta.com'});
 let student2 = new Student({name: 'Kelly', surname: 'Estes', email: 'k_estes@dayrep.com'});
 let teacher1 = new Teacher({name: 'Paula', surname: 'Thompkins', email: 'PaulaThompkins@jourrapide.com'});
 
 student1.addCourse('maths', 2);
-student1.addCourse('physics', 4);
-teacher1.addCourse('maths', 4);
-let match = ExtendedUser.match(teacher1, student1);
-console.log(match); // -> [{course: 'maths', level: 2}]
-teacher1.editCourse('maths', 1);
-match = ExtendedUser.match(teacher1, student1);
-console.log(match); // -> []
-teacher1.addCourse('physics', 4);
-match = ExtendedUser.match(teacher1, student1, 'physics');
-console.log(match); // -> {course: 'physics', level: 4}
+teacher1.addCourse('biology', 3);
+teacher1.editCourse('chemistry', 4);
+console.log(`${student1.fullName}: ${student1.courses.length} courses`); // -> Rafael Fife: 1 courses
+console.log(`${teacher1.fullName}: ${teacher1.courses.length} courses`); // -> Paula Thompkins: 2 courses
+student1.fullName = 'Rafael Fifer';
+console.log(`${student1.fullName}: ${student1.courses.length} courses`); // -> Rafael Fifer: 1 courses
 
 */
 function sendEmail(from, to, message) {}
@@ -94,33 +89,19 @@ class ExtendedUser extends User{
     {
         return `${this.name} ${this.surname}`
     }
-
-    static match(teacher, student, course="")
-    {
-        let matchArray = []
-        for(let i = 0; i<=teacher.courses.length;i++)
-        {
-            for (let j = 0; j <= student.courses.length;j++)
-            {
-                if(teacher.courses[i] === student.courses[j])
-                {
-                    matchArray.push({course: teacher.courses[i], level: teacher.courses[i]})
-                }
-            }
-        }
-        return matchArray.length > 0 ? matchArray : undefined;
-    }
 }
 
 class Teacher extends ExtendedUser{
     constructor({name, surname, email}){
-        super({name, surname, email, role: 'teacher'})
+        super({name, surname, email})
+        this.role = "teacher"
     }
 }
 
 class Student extends ExtendedUser{
     constructor({name, surname, email}){
-        super({name, surname, email, role: "student"})
+        super({name, surname, email})
+        this.role = "student"
     }
 }
 
@@ -130,14 +111,43 @@ let student2 = new Student({name: 'Kelly', surname: 'Estes', email: 'k_estes@day
 let teacher1 = new Teacher({name: 'Paula', surname: 'Thompkins', email: 'PaulaThompkins@jourrapide.com'});
 
 student1.addCourse('maths', 2);
-student1.addCourse('physics', 4);
-teacher1.addCourse('maths', 4);
-let match = ExtendedUser.match(teacher1, student1);
-console.log(match); // -> [{course: 'maths', level: 2}]
-teacher1.editCourse('maths', 1);
-match = ExtendedUser.match(teacher1, student1);
-console.log(match); // -> []
-teacher1.addCourse('physics', 4);
-match = ExtendedUser.match(teacher1, student1, 'physics');
-console.log(match); // -> {course: 'physics', level: 4}
+teacher1.addCourse('biology', 3);
+teacher1.editCourse('chemistry', 4);
+console.log(`${student1.fullName}: ${student1.courses.length} courses`); // -> Rafael Fife: 1 courses
+console.log(`${teacher1.fullName}: ${teacher1.courses.length} courses`); // -> Paula Thompkins: 2 courses
+student1.fullName = 'Rafael Fifer';
+console.log(`${student1.fullName}: ${student1.courses.length} courses`); // -> Rafael Fifer: 1 courses
 
+
+/*-------------------------------------------------------------------------------------------------------------*/
+
+
+class ExtendedUser extends User{
+    constructor({name, surname, email, role}) {
+        super({name, surname, email, role});
+    }
+
+    get fullName() {
+        return `${this.name} ${this.surname}`
+    }
+
+    set fullName(fullName) {
+        let names = fullName.split(' ') ;
+        if(names[0] && names[1]) {
+            this.name = names[0];
+            this.surname = names[1];
+        }
+    }
+}
+
+class Teacher extends ExtendedUser {
+    constructor({name, surname, email}) {
+        super({name, surname, email, role: 'teacher'});
+    }
+}
+
+class Student extends ExtendedUser {
+    constructor({name, surname, email}) {
+        super({name, surname, email, role: 'student'});
+    }
+}
