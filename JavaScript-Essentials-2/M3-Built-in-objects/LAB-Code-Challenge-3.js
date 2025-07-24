@@ -61,7 +61,7 @@ console.log(users.getAll("email").map(u => u.email));
 
 /*-------------------------------------------------------------------------------------------------------------*/
 
-class Users {
+class Users0 {
     #users;
 
     constructor() {
@@ -89,7 +89,7 @@ class Users {
     }
 }
 
-let users = new Users();
+let users0 = new Users();
 users.add("Aaaa", "Bbbb", "cccc@gmail.com");
 users.add("Mmmm", "Ffff", "eeee@gmail.com");
 users.add("Aaaa", "Bbbb", "cccc@gmail.com");

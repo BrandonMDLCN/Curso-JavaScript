@@ -77,3 +77,4 @@ let p1 = myPetsss.slice(3); // ->  ["canary", "shark", "cat", "dog"]
 let p2 = myPetsss.slice(3, 5); // -> ["canary", "shark"]
 let p3 = myPetsss.slice(-3); // -> ["shark", "cat", "dog"]
 let p4 = myPetsss.slice(-3, -1); // -> ["shark", "cat"]
+
